@@ -1343,15 +1343,25 @@
         const floatingMenu = document.getElementById('floatingMenu');
         const overlay = document.getElementById('overlay');
         
-        floatingButton.addEventListener('click', function() {
+        floatingButton.addEventListener('click', function(e) {
             floatingMenu.classList.toggle('active');
             overlay.classList.toggle('active');
+            e.stopPropagation(); // Evita que el clic se propague
         });
         
         // Cerrar el menú cuando se hace clic fuera de él
         overlay.addEventListener('click', function() {
             floatingMenu.classList.remove('active');
             overlay.classList.remove('active');
+        });
+        
+        // Asegurarse de que los clics en los elementos del menú no cierren el menú
+        const menuItems = document.querySelectorAll('.menu-item');
+        menuItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                // Permitir que el enlace funcione normalmente
+                e.stopPropagation();
+            });
         });
     </script>
 </body>
