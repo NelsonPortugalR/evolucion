@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evolución de Tecnologías para Soluciones Empresariales</title>
+    <style>
+        :root {
+            --code-color: #2563eb;
+            --llm-color: #3b82f6;
+            --agent-color: #60a5fa;
+            --protocol-color: #0369a1;
+            --header-bg: #1e40af;
+            --text-dark: #1e3a8a;
+            --text-light: #f8fafc;
+            --bg-light: #f0f9ff;
+            --shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.1), 0 4px 6px -2px rgba(59, 130, 246, 0.05);
+            --card-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1), 0 2px 4px -1px rgba(59, 130, 246, 0.06);
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px 20px;
+            background: linear-gradient(120deg, var(--header-bg) 0%, #2d3748 100%);
+            border-radius: var(--border-radius);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+        }
+
+        .intro {
+            background-color: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            width: 100%;
+            max-width: none;
+        }
+
+        .intro p {
+            margin-bottom: 15px;
+        }
+
+        .intro p:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin: 40px 0 20px;
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            font-weight: 700;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--code-color), var(--llm-color), var(--agent-color), var(--protocol-color));
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .comparison-summary {
+            display: flex;
+            justify-content: space-between;
+            margin: 40px 0;
+            overflow-x: auto;
+            padding: 10px 0;
+            gap: 15px;
+        }
+
+        .evolution-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            min-width: 220px;
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px 15px;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .evolution-step:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+        }
+
+        .evolution-step:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            right: -25px;
+            top: 40%;
+            width: 35px;
+            height: 35px;
+            background-color: white;
+            transform: rotate(45deg);
+            border-top: 2px solid #bfdbfe;
+            border-right: 2px solid #bfdbfe;
+            z-index: 1;
+        }
+
+        .step-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 28px;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .step-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .step-desc {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .tech-accordion {
+            margin-bottom: 40px;
+        }
+
+        .tech-panel {
+            background-color: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 20px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .tech-panel:hover {
+            box-shadow: var(--shadow);
+        }
+
+        .tech-header {
+            padding: 20px;
+            color: white;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .code-header {
+            background: linear-gradient(135deg, var(--code-color) 0%, #1e40af 100%);
+        }
+
+        .llm-header {
+            background: linear-gradient(135deg, var(--llm-color) 0%, #2563eb 100%);
+        }
+
+        .agent-header {
+            background: linear-gradient(135deg, var(--agent-color) 0%, #3b82f6 100%);
+        }
+
+        .protocol-header {
+            background: linear-gradient(135deg, var(--protocol-color) 0%, #0284c7 100%);
+        }
+
+        .tech-icon-wrapper {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 22px;
+        }
+
+        .code-icon {
+            color: var(--code-color);
+        }
+
+        .llm-icon {
+            color: var(--llm-color);
+        }
+
+        .agent-icon {
+            color: var(--agent-color);
+        }
+
+        .protocol-icon {
+            color: var(--protocol-color);
+        }
+
+        .tech-title {
+            flex: 1;
+        }
+
+        .tech-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .tech-tagline {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .tech-overview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 15px 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .overview-item {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .overview-item h3 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+        }
+
+        .overview-item p {
+            font-size: 0.95rem;
+            color: #475569;
+        }
+
+        .tech-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .tech-content.active {
+            max-height: 2000px;
+            transition: max-height 0.8s ease;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .detail-section {
+            background-color: #f1f5f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 1px 3px rgba(59, 130, 246, 0.08);
+        }
+
+        .detail-section h3 {
+            margin-bottom: 12px;
+            color: var(--text-dark);
+            font-size: 1.1rem;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        .detail-section p, .detail-section ul {
+            font-size: 0.95rem;
+            color: #475569;
+        }
+
+        .detail-section ul {
+            padding-left: 20px;
+        }
+
+        .detail-section li {
+            margin-bottom: 8px;
+        }
+
+        .key-diff {
+            background-color: #e0f2fe;
+            border-left: 4px solid;
+            padding: 15px 20px;
+            margin-top: 15px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .code-diff {
+            border-color: var(--code-color);
+        }
+
+        .llm-diff {
+            border-color: var(--llm-color);
+        }
+
+        .agent-diff {
+            border-color: var(--agent-color);
+        }
+
+        .protocol-diff {
+            border-color: var(--protocol-color);
+        }
+
+        .example-block {
+            padding: 20px;
+            background-color: #dbeafe;
+            border-radius: 10px;
+            margin: 20px;
+            border: 1px solid #bfdbfe;
+        }
+
+        .example-block h3 {
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .example-block ol, .example-block ul {
+            padding-left: 25px;
+        }
+
+        .example-block li {
+            margin-bottom: 8px;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .feature-tag {
+            background-color: #bfdbfe;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-dark);
+        }
+
+        .toggle-icon {
+            position: absolute;
+            right: 20px;
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle-icon.active {
+            transform: rotate(180deg);
+        }
+
+        .comparison-footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--card-shadow);
+        }
+
+        .comparison-footer h2 {
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        @media (max-width: 768px) {
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-summary {
+                flex-direction: column;
+            }
+            
+            .evolution-step:not(:last-child)::after {
+                content: "↓";
+                position: absolute;
+                bottom: -30px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: auto;
+                height: auto;
+                background-color: transparent;
+                border: none;
+                font-size: 24px;
+                color: #a0aec0;
+            }
+            
+            .evolution-step {
+                margin-bottom: 30px;
+            }
+
+            .tech-overview {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Evolución de Tecnologías para Soluciones Empresariales</h1>
+        </header>
+
+        <div class="intro">
+            <p>La tecnología empresarial ha evolucionado desde simples automatizaciones hasta sistemas inteligentes que toman decisiones en tiempo real. Esta transformación ha ampliado dramáticamente las capacidades de las empresas para resolver problemas complejos y generar valor.</p>
+            <p>Descubre qué tecnología se adapta mejor a tus necesidades: desde el código tradicional hasta los modernos protocolos de contexto, cada avance ofrece diferentes capacidades para optimizar tus procesos de negocio.</p>
+        </div>
+
+        <div class="section-title">Comparación Simplificada</div>
+
+        <div class="comparison-summary">
+            <div class="evolution-step">
+                <div class="step-icon" style="background-color: var(--code-color);">&lt;/&gt;</div>
+                <div class="step-title">Código Tradicional</div>
+                <p class="step-desc">Como una calculadora: preciso pero limitado a instrucciones predefinidas.</p>
+            </div>
+            <div class="evolution-step">
+                <div class="step-icon" style="background-color: var(--llm-color);">💬</div>
+                <div class="step-title">LLMs</div>
+                <p class="step-desc">Como un analista: interpreta datos no estructurados y descubre patrones ocultos.</p>
+            </div>
+            <div class="evolution-step">
+                <div class="step-icon" style="background-color: var(--agent-color);">🤖</div>
+                <div class="step-title">Agentes</div>
+                <p class="step-desc">Como un asistente ejecutivo: toma decisiones y ejecuta tareas complejas.</p>
+            </div>
+            <div class="evolution-step">
+                <div class="step-icon" style="background-color: var(--protocol-color);">🔄</div>
+                <div class="step-title">Protocolos</div>
+                <p class="step-desc">Como un equipo de gestión: coordina sistemas y responde a cambios en tiempo real.</p>
+            </div>
+        </div>
+
+        <div class="section-title">Tecnologías en Detalle</div>
+
+        <div class="tech-accordion">
+            <!-- Código Tradicional -->
+            <div class="tech-panel">
+                <div class="tech-header code-header" onclick="toggleTech('code-details')">
+                    <div class="tech-icon-wrapper">
+                        <div class="code-icon">&lt;/&gt;</div>
+                    </div>
+                    <div class="tech-title">
+                        <div class="tech-name">Código Tradicional</div>
+                        <div class="tech-tagline">Automatización con reglas predefinidas</div>
+                    </div>
+                    <span class="toggle-icon" id="code-toggle">▼</span>
+                </div>
+                <div class="tech-overview">
+                    <div class="overview-item">
+                        <h3>Lo que permite:</h3>
+                        <p>Automatizar tareas repetitivas que antes requerían intervención manual.</p>
+                    </div>
+                    <div class="overview-item">
+                        <h3>Ejemplo:</h3>
+                        <p>Sistema de inventario que registra movimientos y genera alertas de reposición.</p>
+                    </div>
+                    <div class="overview-item">
+                        <h3>Limitación:</h3>
+                        <p>Solo hace exactamente lo programado; requiere reprogramación ante cambios.</p>
+                    </div>
+                </div>
+                <div class="tech-content" id="code-details">
+                    <div class="detail-grid">
+                        <div class="detail-section">
+                            <h3>¿Qué es?</h3>
+                            <p>Programación tradicional donde escribes instrucciones paso a paso que la computadora sigue exactamente, sin capacidad de adaptarse o tomar decisiones por sí misma.</p>
+                        </div>
+                        <div class="detail-section">
+                            <h3>Lo que permitió hacer</h3>
+                            <p>Antes del código, los procesos empresariales eran 100% manuales: empleados contando inventario, haciendo cálculos, enviando notificaciones y gestionando registros en papel. El código automatizó estas tareas repetitivas, reduciendo errores y aumentando la velocidad.</p>
+                        </div>
+                        <div class="detail-section">
+                            <h3>¿Cuándo usarlo?</h3>
+                            <div class="feature-list">
+                                <span class="feature-tag">Reglas simples y definidas</span>
+                                <span class="feature-tag">Procesos estables</span>
+                                <span class="feature-tag">Datos estructurados</span>
+                                <span class="feature-tag">Respuestas predecibles</span>
+                            </div>
+                            <p>Ideal para automatizar tareas rutinarias con reglas claras que cambian poco.</p>
+                        </div>
+                        <div class="detail-section">
+                            <h3>Limitación clave</h3>
+                            <p>Si las condiciones cambian (temporada navideña, nuevo competidor), el sistema no se adapta por sí mismo—alguien debe reprogramarlo. Solo hace exactamente lo que le programaste, ni más ni menos.</p>
+                            <div class="key-diff code-diff">
+                                <h3>Diferenciador clave</h3>
+                                <p>La automatización básica: Transformó procesos manuales en automáticos pero con reglas rígidas y predefinidas.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="example-block">
+                        <h3>Ejemplo concreto: Sistema de gestión de inventario</h3>
+                        <p>Un programa que:</p>
+                        <ul>
+                            <li>Registra cada producto que entra y sale del almacén</li>
+                            <li>Calcula automáticamente el inventario actual</li>
+                            <li>Envía una alerta cuando quedan menos de 10 unidades</li>
+                            <li>Genera reportes mensuales de rotación</li>
+                        </ul>
+                        <p>Este sistema funciona perfectamente mientras los parámetros del negocio no cambien. Si surge una nueva necesidad (como tener en cuenta la temporada para ajustar niveles de alerta), requiere que un programador modifique el código manualmente.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LLMs -->
+            <div class="tech-panel">
+                <div class="tech-header llm-header" onclick="toggleTech('llm-details')">
+                    <div class="tech-icon-wrapper">
+                        <div class="llm-icon">💬</div>
+                    </div>
+                    <div class="tech-title">
+                        <div class="tech-name">LLMs (Modelos de Lenguaje)</div>
+                        <div class="tech-tagline">Inteligencia para datos no estructurados</div>
+                    </div>
+                    <span class="toggle-icon" id="llm-toggle">▼</span>
+                </div>
+                <div class="tech-overview">
+                    <div class="overview-item">
+                        <h3>Lo que permite:</h3>
+                        <p>Procesar lenguaje natural y descubrir insights que no se buscaban inicialmente.</p>
+                    </div>
+                    <div class="overview-item">
+                        <h3>Ejemplo:</h3>
+                        <p>Análisis de retroalimentación de clientes que identifica problemas emergentes.</p>
+                    </div>
+                    <div class="overview-item">
+                        <h3>Limitación:</h3>
+                        <p>No pueden realizar acciones por sí mismos ni integrar sistemas externos.</p>
+                    </div>
+                </div>
+                <div class="tech-content" id="llm-details">
+                    <div class="detail-grid">
+                        <div class="detail-section">
+                            <h3>¿Qué es?</h3>
+                            <p>Sistemas de IA que entienden y generan texto como lo haría una persona, captando el significado y contexto del lenguaje humano, con capacidad de razonamiento básico sobre situaciones nuevas.</p>
+                        </div>
+                        <div class="detail-section">
+                            <h3>Lo que permitió hacer</h3>
+                            <p>Con el código tradicional, si algo no estaba explícitamente programado, el sistema fallaba o daba respuestas incorrectas. Los LLMs pueden:</p>
+                            <ul>
+                                <li>Procesar lenguaje natural sin depender de palabras clave específicas</li>
+                                <li>Razonar sobre situaciones nuevas no configuradas</li>
+                                <li>Extraer significado de datos no estructurados</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <h3>¿Cuándo usarlo?</h3>
+                            <div class="feature-list">
+                                <span class="feature-tag">Datos no estructurados</span>
+                                <span class="feature-tag">Descubrir patrones</span>
+                                <span class="feature-tag">Generar contenido</span>
+                                <span class="feature-tag">Análisis de texto</span>
+                            </div>
+                            <p>Perfecto para extraer valor de grandes volúmenes de texto y encontrar insights que no sabías que existían.</p>
+                        </div>
+                        <div class="detail-section">
+                            <h3>Limitación clave</h3>
+                            <p>Limitados a analizar y generar contenido; no pueden realizar acciones por sí mismos ni integrar sistemas externos. Excelentes para entender y comunicar, pero no para actuar.</p>
+                            <div class="key-diff llm-diff">
+                                <h3>Diferenciador clave</h3>
+                                <p>Comprensión contextual: Mientras que el código tradicional solo encontraría lo que programaste explícitamente buscar, los LLMs descubren insights que ni sabías que debías investigar.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="example-block">
+                        <h3>Ejemplo concreto: Análisis de retroalimentación de clientes</h3>
+                        <p>Un sistema que:</p>
+                        <ul>
+                            <li>Analiza miles de comentarios en redes sociales, emails y encuestas</li>
+                            <li>Entiende que frases como "Se desarmó al tercer uso" y "No aguantó ni una semana" hablan del mismo problema (durabilidad)</li>
+                            <li>Identifica problemas emergentes que nunca le dijiste que buscara: "Muchos clientes mencionan que el empaque no es reciclable"</li>
+                            <li>Descubre correlaciones: "Los clientes que compran en temporada de lluvias reportan más fallos de producto"</li>
+                        </ul>
+                        <p>A diferencia de un sistema tradicional que requeriría programar cada palabra clave y categoría, este sistema encuentra patrones por sí mismo y se adapta a nuevas expresiones sin reprogramación.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Agentes con LangChain -->
+            <div class="tech-panel">
+                <div class="tech-header agent-header" onclick="toggleTech('agent-details')">
+                    <div class="tech-icon-wrapper">
+                        <div class="agent-icon">🤖</div>
+                    </div>
+                    <div class="tech-title">
+                        <div class="tech-name">Agentes con LangChain</div>
+                        <div class="tech-tagline">Autonomía y capacidad de acción</div>
+                    </div>
+                    <span class="toggle-icon" id="agent-toggle">▼</span>
+                </div>
+                <div class="tech-overview">
+                    <div class="overview-item">
+                        <h3>Lo que permite:</h3>
+                        <p>Ejecutar procesos completos multietapa con razonamiento y toma de decisiones.</p>
+                    </div>
+                    <div class="overview-item">
+                        <h3>Ejemplo:</h3>
+                        <p>Asistente de compras que evalúa opciones y recomienda la mejor basada en múltiples factores.</p>
+                    </div>
+                    <div class="overview-item">
+                        <h3>Limitación:</h3>
+                        <p>Dependen de información disponible en el momento; no reaccionan a cambios en tiempo real.</p>
+                    </div>
+                </div>
+                <div class="tech-content" id="agent-details">
+                    <div class="detail-grid">
+                        <div class="detail-section">
+                            <h3>¿Qué es?</h3>
+                            <p>Sistemas "autónomos" que combinan la comprensión del lenguaje con la capacidad de actuar, usando diferentes herramientas y tomando decisiones sobre qué pasos seguir según el contexto específico.</p>
+                        </div>
+                        <div class="detail-section">
+                            <h3>Lo que permitió hacer</h3>
+                            <p>Con LLMs básicos podías entender lenguaje y razonar, pero no ejecutar acciones complejas en secuencia. Los agentes pueden:</p>
+                            <ul>
+                                <li>Decidir por sí mismos qué herramientas necesitan usar y en qué orden</li>
+                                <li>Seguir procesos multietapa que antes requerían intervención humana</li>
+                                <li>Integrar información de múltiples fuentes para tomar decisiones</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <h3>¿Cuándo usarlo?</h3>
+                            <div class="feature-list">
+                                <span class="feature-tag">Procesos completos</span>
+                                <span class="feature-tag">Decisiones multi-factor</span>
+                                <span class="feature-tag">Flujos adaptativos</span>
+                                <span class="feature-tag">Razonamiento</span>
+                            </div>
+                            <p>Ideal para automatizar procesos que requieren decisiones basadas en múltiples variables y uso de diferentes herramientas.</p>
+                        </div>
+                        <div class="detail-section">
+                            <h3>Limitación clave</h3>
+                            <p>Dependen de información disponible en el momento; no pueden reaccionar a condiciones cambiantes en tiempo real durante la ejecución del proceso. La información que utilizan puede quedar desactualizada rápidamente.</p>
+                            <div class="key-diff agent-diff">
+                                <h3>Diferenciador clave</h3>
+                                <p>Autonomía y acción: Un LLM básico podría entender la solicitud y quizás generar especificaciones, pero no podría ejecutar todo el proceso. Un sistema de código tradicional requeriría programar cada posible camino de decisión.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="example-block">
+                        <h3>Ejemplo concreto: Asistente de adquisiciones empresariales</h3>
+                        <p>Un agente que maneja el proceso completo de compras:</p>
+                        <ol>
+                            <li>Recibe una solicitud: "Necesitamos 20 laptops para el equipo de desarrollo"</li>
+                            <li>Autónomamente:
+                                <ul>
+                                    <li>Consulta la política de compras para verificar aprobaciones necesarias</li>
+                                    <li>Revisa el presupuesto disponible del departamento</li>
+                                    <li>Investiga especificaciones técnicas apropiadas para desarrolladores</li>
+                                    <li>Solicita cotizaciones a proveedores aprobados</li>
+                                    <li>Compara opciones considerando precio, plazos y especificaciones</li>
+                                    <li>Recomienda: "Sugiero el Modelo X a $1,200/unidad porque tiene mejor rendimiento para tareas de compilación"</li>
+                                </ul>
+                            </li>
+                        </ol>
+                        <p>Este agente no solo entiende la solicitud, sino que ejecuta todo el proceso de decisión, consultando diferentes sistemas y herramientas según lo requiera cada paso.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Protocolos de Contexto -->
+            <div class="tech-panel">
+                <div class="tech-header protocol-header" onclick="toggleTech('protocol-details')">
+                    <div class="tech-icon-wrapper">
+                        <div class="protocol-icon">🔄</div>
+                    </div>
+                    <div class="tech-title">
+                        <div class="tech-name">Protocolos de Contexto</div>
+                        <div class="tech-tagline">Decisiones en tiempo real</div>
+                    </div>
+                    <span class="toggle-icon" id="protocol-toggle">▼</span>
+                </div>
+                <div class="tech-overview">
+                    <div class="overview-item">
+                        <h3>Lo que permite:</h3>
+                        <p>Tomar decisiones basadas en condiciones que cambian minuto a minuto.</p>
+                    </div>
+                    <div class="overview-item">
+                        <h3>Ejemplo:</h3>
+                        <p>Sistema de precios dinámicos que ajusta valores según cambios del mercado en tiempo real.</p>
+                    </div>
+                    <div class="overview-item">
+                        <h3>Limitación:</h3>
+                        <p>Requieren infraestructura compleja y accesos seguros a múltiples sistemas.</p>
+                    </div>
+                </div>
+                <div class="tech-content" id="protocol-details">
+                    <div class="detail-grid">
+                        <div class="detail-section">
+                            <h3>¿Qué es?</h3>
+                            <p>Sistemas avanzados que permiten a la IA conectarse con el mundo exterior en tiempo real, consultando y actualizando múltiples sistemas mientras mantienen el contexto completo de lo que están haciendo.</p>
+                        </div>
+                        <div class="detail-section">
+                            <h3>Lo que permitió hacer</h3>
+                            <p>Con agentes básicos, las conexiones a sistemas externos eran limitadas y la información podía quedar desactualizada rápidamente. Los protocolos de contexto permiten:</p>
+                            <ul>
+                                <li>Consultar información en tiempo real de múltiples fuentes</li>
+                                <li>Mantener el contexto a través de sistemas diversos</li>
+                                <li>Responder a condiciones cambiantes en tiempo real</li>
+                            </ul>
+                        </div>
+                        <div class="detail-section">
+                            <h3>¿Cuándo usarlo?</h3>
+                            <div class="feature-list">
+                                <span class="feature-tag">Entorno cambiante</span>
+                                <span class="feature-tag">Múltiples sistemas</span>
+                                <span class="feature-tag">Decisiones inmediatas</span>
+                                <span class="feature-tag">Datos en tiempo real</span>
+                            </div>
+                            <p>Ideal para escenarios donde las condiciones cambian constantemente y se requieren decisiones basadas en el estado actual de múltiples sistemas.</p>
+                        </div>
+                        <div class="detail-section">
+                            <h3>Limitación clave</h3>
+                            <p>Requieren infraestructura compleja y accesos seguros a múltiples sistemas, lo que aumenta la complejidad técnica y los posibles puntos de fallo. La implementación es más costosa y requiere mayor mantenimiento.</p>
+                            <div class="key-diff protocol-diff">
+                                <h3>Diferenciador clave</h3>
+                                <p>Toma de decisiones en tiempo real: Los agentes básicos podrían tomar decisiones inteligentes pero con información potencialmente desactualizada. Los protocolos de contexto permiten decisiones basadas en lo que está sucediendo literalmente ahora.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="example-block">
+                        <h3>Ejemplo concreto: Sistema de precios dinámicos para e-commerce</h3>
+                        <p>Un sistema que optimiza precios en tiempo real:</p>
+                        <ol>
+                            <li>Detecta que un competidor acaba de bajar el precio de un producto hace 5 minutos</li>
+                            <li>Inmediatamente:
+                                <ul>
+                                    <li>Consulta tu nivel de inventario actual en tiempo real</li>
+                                    <li>Verifica el inventario disponible en tus proveedores</li>
+                                    <li>Analiza la velocidad actual de ventas del producto</li>
+                                    <li>Revisa promociones programadas para las próximas horas</li>
+                                    <li>Consulta el margen mínimo aceptable según las políticas financieras</li>
+                                    <li>Verifica si hay eventos relevantes en curso (Black Friday, lanzamiento)</li>
+                                </ul>
+                            </li>
+                            <li>Toma una decisión fundamentada: "Reduciendo precio un 5% durante las próximas 3 horas porque el competidor bajó su precio un 8%, pero tenemos mejor valoración y stock limitado"</li>
+                        </ol>
+                        <p>Este sistema no solo integra información de múltiples fuentes, sino que lo hace en tiempo real, permitiendo respuestas inmediatas a cambios en el mercado.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleTech(id) {
+            const content = document.getElementById(id);
+            content.classList.toggle('active');
+            
+            // Obtener el ID del toggle correspondiente
+            const toggleId = id.split('-')[0] + '-toggle';
+            const toggleIcon = document.getElementById(toggleId);
+            toggleIcon.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
