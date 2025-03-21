@@ -4,450 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evolución de Tecnologías para Soluciones Empresariales</title>
-    <style>
-        :root {
-            --code-color: #2563eb;
-            --llm-color: #3b82f6;
-            --agent-color: #60a5fa;
-            --protocol-color: #0369a1;
-            --header-bg: #1e40af;
-            --text-dark: #1e3a8a;
-            --text-light: #f8fafc;
-            --bg-light: #f0f9ff;
-            --shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.1), 0 4px 6px -2px rgba(59, 130, 246, 0.05);
-            --card-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1), 0 2px 4px -1px rgba(59, 130, 246, 0.06);
-            --border-radius: 12px;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
-            line-height: 1.6;
-            font-size: 16px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 20px;
-            padding: 20px;
-            background: linear-gradient(120deg, var(--header-bg) 0%, #2d3748 100%);
-            border-radius: var(--border-radius);
-            color: white;
-            box-shadow: var(--shadow);
-        }
-
-        h1 {
-            margin-bottom: 10px;
-            font-size: 1.8rem;
-            font-weight: 800;
-            letter-spacing: -0.025em;
-        }
-
-        .intro {
-            background-color: white;
-            padding: 20px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--card-shadow);
-            margin-bottom: 20px;
-            font-size: 1rem;
-            line-height: 1.5;
-            width: 100%;
-            max-width: none;
-        }
-
-        .intro p {
-            margin-bottom: 15px;
-        }
-
-        .intro p:last-child {
-            margin-bottom: 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin: 25px 0 15px;
-            font-size: 1.5rem;
-            color: var(--text-dark);
-            font-weight: 700;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: "";
-            display: block;
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--code-color), var(--llm-color), var(--agent-color), var(--protocol-color));
-            margin: 10px auto 0;
-            border-radius: 2px;
-        }
-
-        .comparison-summary {
-            display: flex;
-            justify-content: space-between;
-            margin: 20px 0;
-            overflow-x: auto;
-            padding: 5px 0;
-            gap: 15px;
-        }
-
-        .evolution-step {
-            flex: 1;
-            text-align: center;
-            position: relative;
-            min-width: 220px;
-            background: white;
-            border-radius: var(--border-radius);
-            padding: 15px;
-            box-shadow: var(--card-shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .evolution-step:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow);
-        }
-
-        .evolution-step:not(:last-child)::after {
-            content: "";
-            position: absolute;
-            right: -25px;
-            top: 40%;
-            width: 35px;
-            height: 35px;
-            background-color: white;
-            transform: rotate(45deg);
-            border-top: 2px solid #bfdbfe;
-            border-right: 2px solid #bfdbfe;
-            z-index: 1;
-        }
-
-        .step-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 10px;
-            font-size: 24px;
-            color: white;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .step-title {
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-        }
-
-        .step-desc {
-            font-size: 0.9rem;
-            color: #64748b;
-        }
-
-        .tech-accordion {
-            margin-bottom: 20px;
-        }
-
-        .tech-panel {
-            background-color: white;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--card-shadow);
-            margin-bottom: 15px;
-            transition: box-shadow 0.3s ease;
-        }
-
-        .tech-panel:hover {
-            box-shadow: var(--shadow);
-        }
-
-        .tech-header {
-            padding: 12px 15px;
-            color: white;
-            border-radius: var(--border-radius) var(--border-radius) 0 0;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            position: relative;
-        }
-
-        .code-header {
-            background: linear-gradient(135deg, var(--code-color) 0%, #1e40af 100%);
-        }
-
-        .llm-header {
-            background: linear-gradient(135deg, var(--llm-color) 0%, #2563eb 100%);
-        }
-
-        .agent-header {
-            background: linear-gradient(135deg, var(--agent-color) 0%, #3b82f6 100%);
-        }
-
-        .protocol-header {
-            background: linear-gradient(135deg, var(--protocol-color) 0%, #0284c7 100%);
-        }
-
-        .tech-icon-wrapper {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 15px;
-            font-size: 22px;
-        }
-
-        .code-icon {
-            color: var(--code-color);
-        }
-
-        .llm-icon {
-            color: var(--llm-color);
-        }
-
-        .agent-icon {
-            color: var(--agent-color);
-        }
-
-        .protocol-icon {
-            color: var(--protocol-color);
-        }
-
-        .tech-title {
-            flex: 1;
-        }
-
-        .tech-name {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .tech-tagline {
-            font-size: 0.95rem;
-            opacity: 0.9;
-        }
-
-        .tech-overview {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            padding: 15px 20px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .overview-item {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .overview-item h3 {
-            font-size: 1rem;
-            margin-bottom: 5px;
-            color: var(--text-dark);
-        }
-
-        .overview-item p {
-            font-size: 0.95rem;
-            color: #475569;
-        }
-
-        .tech-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease;
-        }
-
-        .tech-content.active {
-            max-height: 2000px;
-            transition: max-height 0.8s ease;
-        }
-
-        .detail-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            padding: 15px;
-        }
-
-        .detail-section {
-            background-color: #f1f5f9;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 1px 3px rgba(59, 130, 246, 0.08);
-        }
-
-        .detail-section h3 {
-            margin-bottom: 12px;
-            color: var(--text-dark);
-            font-size: 1.1rem;
-            border-bottom: 2px solid #e2e8f0;
-            padding-bottom: 8px;
-        }
-
-        .detail-section p, .detail-section ul {
-            font-size: 0.95rem;
-            color: #475569;
-        }
-
-        .detail-section ul {
-            padding-left: 20px;
-        }
-
-        .detail-section li {
-            margin-bottom: 8px;
-        }
-
-        .key-diff {
-            background-color: #e0f2fe;
-            border-left: 4px solid;
-            padding: 15px 20px;
-            margin-top: 15px;
-            border-radius: 0 8px 8px 0;
-        }
-
-        .code-diff {
-            border-color: var(--code-color);
-        }
-
-        .llm-diff {
-            border-color: var(--llm-color);
-        }
-
-        .agent-diff {
-            border-color: var(--agent-color);
-        }
-
-        .protocol-diff {
-            border-color: var(--protocol-color);
-        }
-
-        .example-block {
-            padding: 15px;
-            background-color: #dbeafe;
-            border-radius: 10px;
-            margin: 15px;
-            border: 1px solid #bfdbfe;
-        }
-
-        .example-block h3 {
-            color: var(--text-dark);
-            margin-bottom: 15px;
-        }
-
-        .example-block ol, .example-block ul {
-            padding-left: 25px;
-        }
-
-        .example-block li {
-            margin-bottom: 8px;
-        }
-
-        .feature-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 15px 0;
-        }
-
-        .feature-tag {
-            background-color: #bfdbfe;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            color: var(--text-dark);
-        }
-
-        .toggle-icon {
-            position: absolute;
-            right: 20px;
-            color: white;
-            font-size: 1.5rem;
-            transition: transform 0.3s ease;
-        }
-
-        .toggle-icon.active {
-            transform: rotate(180deg);
-        }
-
-        .comparison-footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 30px;
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--card-shadow);
-        }
-
-        .comparison-footer h2 {
-            margin-bottom: 20px;
-            color: var(--text-dark);
-        }
-
-@media (max-width: 768px) {
-            .detail-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .comparison-summary {
-                flex-direction: column;
-            }
-            
-            .evolution-step:not(:last-child)::after {
-                content: "↓";
-                position: absolute;
-                bottom: -30px;
-                left: 50%;
-                transform: translateX(-50%);
-                width: auto;
-                height: auto;
-                background-color: transparent;
-                border: none;
-                font-size: 24px;
-                color: #a0aec0;
-            }
-            
-            .evolution-step {
-                margin-bottom: 30px;
-            }
-
-            .tech-overview {
-                flex-direction: column;
-            }
-            
-            .floating-container {
-                bottom: 20px;
-                right: 20px;
-            }
-            
-            .floating-button {
-                width: 220px;
-                height: 50px;
-                font-size: 0.9rem;
-            }
-        }<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evolución de Tecnologías para Soluciones Empresariales</title>
     <!-- Font Awesome para íconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -947,6 +503,49 @@
             visibility: visible;
             background-color: rgba(0, 0, 0, 0.1);
         }
+
+        @media (max-width: 768px) {
+            .detail-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-summary {
+                flex-direction: column;
+            }
+            
+            .evolution-step:not(:last-child)::after {
+                content: "↓";
+                position: absolute;
+                bottom: -30px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: auto;
+                height: auto;
+                background-color: transparent;
+                border: none;
+                font-size: 24px;
+                color: #a0aec0;
+            }
+            
+            .evolution-step {
+                margin-bottom: 30px;
+            }
+
+            .tech-overview {
+                flex-direction: column;
+            }
+            
+            .floating-container {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .floating-button {
+                width: 220px;
+                height: 50px;
+                font-size: 0.9rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -964,7 +563,7 @@
 
         <div class="comparison-summary">
             <div class="evolution-step">
-                <div class="step-icon" style="background-color: var(--code-color);">&lt;/&gt;</div>
+                <div class="step-icon" style="background-color: var(--code-color);"></></div>
                 <div class="step-title">Código Tradicional</div>
                 <p class="step-desc">Como una calculadora: preciso pero limitado a instrucciones predefinidas.</p>
             </div>
@@ -992,7 +591,7 @@
             <div class="tech-panel">
                 <div class="tech-header code-header" onclick="toggleTech('code-details')">
                     <div class="tech-icon-wrapper">
-                        <div class="code-icon">&lt;/&gt;</div>
+                        <div class="code-icon"></></div>
                     </div>
                     <div class="tech-title">
                         <div class="tech-name">Código Tradicional</div>
@@ -1083,7 +682,7 @@
                         <h3>Limitación:</h3>
                         <p>No pueden realizar acciones por sí mismos ni integrar sistemas externos.</p>
                     </div>
-                </div>
+ |               </div>
                 <div class="tech-content" id="llm-details">
                     <div class="detail-grid">
                         <div class="detail-section">
@@ -1124,7 +723,7 @@
                         <p>Un sistema que:</p>
                         <ul>
                             <li>Analiza miles de comentarios en redes sociales, emails y encuestas</li>
-                            <li>Entiende que frases como "Se desarmó al tercer uso" y "No aguantó ni una semana" hablan del mismo problema (durabilidad)</li>
+                            <li>Entiende que frases como "Se desarmó al tercer uso" y "No aguantó ni una semana" hablan помощ del mismo problema (durabilidad)</li>
                             <li>Identifica problemas emergentes que nunca le dijiste que buscara: "Muchos clientes mencionan que el empaque no es reciclable"</li>
                             <li>Descubre correlaciones: "Los clientes que compran en temporada de lluvias reportan más fallos de producto"</li>
                         </ul>
